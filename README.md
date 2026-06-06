@@ -12,6 +12,7 @@ The goal of this repository is to build a strong understanding of identifying mo
 |--------|----------|------|
 | 1 | Square Root of a Number | [findingsqrt.cpp](./codes/findingsqrt.cpp) |
 | 2 | Finding Nth Root of a Number | [findingnthrootofnumber.cpp](./codes/findingnthrootofnumber.cpp) |
+| 3 | Koko Eating Bananas | [kokoeatingbananas.cpp](./codes/kokoeatingbananas.cpp) |
 
 ---
 
@@ -105,8 +106,53 @@ O(1)
 ```
 
 ---
+### 3. Koko Eating Bananas
 
+**File:** `codes/kokoeatingbananas.cpp`
+
+#### Approach
+
+- We need to find the minimum eating speed `k` such that Koko can finish all banana piles within `h` hours.
+- The answer lies in the range:
+  - Minimum speed = `1`
+  - Maximum speed = `max(piles)`
+- For a chosen speed `mid`:
+  - Calculate the total hours required to eat all piles.
+  - For each pile:
+  
+  ```cpp
+  hours += ceil((double)pile / mid);
+  ```
+
+- If the required hours are less than or equal to `h`, then this speed is valid, and we try to find a smaller valid speed.
+- Otherwise, we need a larger speed.
+
+#### Monotonic Property
+
+- If Koko can finish all bananas at speed `k`,
+  then she can also finish them at any speed greater than `k`.
+
+This monotonic behavior makes Binary Search on Answers applicable.
+
+#### Time Complexity
+
+```text
+O(n × log(max(piles)))
+```
+
+where:
+
+- n = number of piles
+- max(piles) = largest pile size
+
+#### Space Complexity
+
+```text
+O(1)
+```
 ## 🎯 Learning Outcomes
+
+Through these problems, I learned:
 
 Through these problems, I learned:
 
@@ -115,6 +161,8 @@ Through these problems, I learned:
 - Designing efficient helper/check functions.
 - Preventing overflow while computing powers.
 - Applying binary search to mathematical problems.
+- Solving optimization problems by minimizing or maximizing a valid answer.
+- Using binary search with constraints involving time, speed, and capacity.
 
 ---
 
