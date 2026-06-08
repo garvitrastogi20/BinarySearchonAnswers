@@ -13,6 +13,8 @@ The goal of this repository is to build a strong understanding of identifying mo
 | 1 | Square Root of a Number | [findingsqrt.cpp](./codes/findingsqrt.cpp) |
 | 2 | Finding Nth Root of a Number | [findingnthrootofnumber.cpp](./codes/findingnthrootofnumber.cpp) |
 | 3 | Koko Eating Bananas | [kokoeatingbananas.cpp](./codes/kokoeatingbananas.cpp) |
+| 4 | Minimum Number of Days to Make m Bouquets | [mindaysformbouquets.cpp](./codes/mindaysformbouquets.cpp) |
+| 5 | Find the Smallest Divisor Given a Threshold | [smallestdivisorgivenathreshold.cpp](./codes/smallestdivisorgivenathreshold.cpp) |
 
 ---
 
@@ -55,6 +57,7 @@ while(low <= high)
 **File:** `codes/findingsqrt.cpp`
 
 #### Approach
+
 - The square root of a number `n` lies between `1` and `n`.
 - Use binary search on this range.
 - For each midpoint:
@@ -82,6 +85,7 @@ O(1)
 **File:** `codes/findingnthrootofnumber.cpp`
 
 #### Approach
+
 - The nth root of a number `m` lies between `1` and `m`.
 - Use binary search on this search space.
 - Create a helper function to:
@@ -106,6 +110,7 @@ O(1)
 ```
 
 ---
+
 ### 3. Koko Eating Bananas
 
 **File:** `codes/kokoeatingbananas.cpp`
@@ -119,20 +124,17 @@ O(1)
 - For a chosen speed `mid`:
   - Calculate the total hours required to eat all piles.
   - For each pile:
-  
-  ```cpp
-  hours += ceil((double)pile / mid);
-  ```
+
+```cpp
+hours += ceil((double)pile / mid);
+```
 
 - If the required hours are less than or equal to `h`, then this speed is valid, and we try to find a smaller valid speed.
 - Otherwise, we need a larger speed.
 
 #### Monotonic Property
 
-- If Koko can finish all bananas at speed `k`,
-  then she can also finish them at any speed greater than `k`.
-
-This monotonic behavior makes Binary Search on Answers applicable.
+- If Koko can finish all bananas at speed `k`, then she can also finish them at any speed greater than `k`.
 
 #### Time Complexity
 
@@ -140,19 +142,93 @@ This monotonic behavior makes Binary Search on Answers applicable.
 O(n × log(max(piles)))
 ```
 
-where:
+#### Space Complexity
 
-- n = number of piles
-- max(piles) = largest pile size
+```text
+O(1)
+```
+
+---
+
+### 4. Minimum Number of Days to Make m Bouquets
+
+**File:** `codes/mindaysformbouquets.cpp`
+
+#### Approach
+
+- We need to find the minimum number of days required to make `m` bouquets.
+- Each bouquet requires `k` adjacent flowers.
+- The answer lies between:
+  - Minimum bloom day in the array.
+  - Maximum bloom day in the array.
+- For a chosen day `mid`:
+  - Count the flowers that have bloomed by that day.
+  - Form bouquets using consecutive bloomed flowers.
+- If at least `m` bouquets can be formed:
+  - Try a smaller day.
+- Otherwise:
+  - Increase the day.
+
+#### Monotonic Property
+
+- If it is possible to make `m` bouquets on day `d`, then it is also possible on any day greater than `d`.
+
+#### Time Complexity
+
+```text
+O(n × log(maxBloomDay))
+```
 
 #### Space Complexity
 
 ```text
 O(1)
 ```
-## 🎯 Learning Outcomes
 
-Through these problems, I learned:
+---
+
+### 5. Find the Smallest Divisor Given a Threshold
+
+**File:** `codes/smallestdivisorgivenathreshold.cpp`
+
+#### Approach
+
+- We need to find the smallest divisor such that:
+
+```text
+Σ ceil(arr[i] / divisor) ≤ threshold
+```
+
+- The answer lies between:
+  - `1`
+  - `max(arr)`
+- For a chosen divisor `mid`:
+  - Compute the sum of all ceiling divisions.
+- If the sum is within the threshold:
+  - Try a smaller divisor.
+- Otherwise:
+  - Increase the divisor.
+
+#### Monotonic Property
+
+- As the divisor increases, the total sum decreases or remains the same.
+- This monotonic behavior makes Binary Search on Answers applicable.
+
+#### Time Complexity
+
+```text
+O(n × log(max(arr)))
+```
+
+#### Space Complexity
+
+```text
+O(1)
+```
+
+---
+
+## 🎯 Learning Outcomes
 
 Through these problems, I learned:
 
@@ -162,7 +238,8 @@ Through these problems, I learned:
 - Preventing overflow while computing powers.
 - Applying binary search to mathematical problems.
 - Solving optimization problems by minimizing or maximizing a valid answer.
-- Using binary search with constraints involving time, speed, and capacity.
+- Using binary search with constraints involving time, speed, days, divisors, and capacity.
+- Recognizing common Binary Search on Answers patterns used in coding interviews.
 
 ---
 
