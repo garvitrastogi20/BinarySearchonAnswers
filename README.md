@@ -15,6 +15,7 @@ The goal of this repository is to build a strong understanding of identifying mo
 | 3 | Koko Eating Bananas | [kokoeatingbananas.cpp](./codes/kokoeatingbananas.cpp) |
 | 4 | Minimum Number of Days to Make m Bouquets | [mindaysformbouquets.cpp](./codes/mindaysformbouquets.cpp) |
 | 5 | Find the Smallest Divisor Given a Threshold | [smallestdivisorgivenathreshold.cpp](./codes/smallestdivisorgivenathreshold.cpp) |
+| 6 | Capacity to Ship Packages Within D Days | [capacitytoshipwithinddays.cpp](./codes/capacitytoshipwithinddays.cpp) |
 
 ---
 
@@ -225,7 +226,43 @@ O(n × log(max(arr)))
 ```text
 O(1)
 ```
+### 6. Capacity to Ship Packages Within D Days
 
+**File:** `codes/capacitytoshipwithinddays.cpp`
+
+#### Approach
+
+- We need to find the minimum ship capacity such that all packages are shipped within `D` days.
+- The answer lies between:
+  - Maximum weight in the array (minimum possible capacity).
+  - Sum of all package weights (maximum possible capacity).
+- Use binary search on this range.
+- For a chosen capacity `mid`:
+  - Simulate the shipping process.
+  - Keep loading packages until adding the next package exceeds the capacity.
+  - Start a new day whenever the capacity is exceeded.
+- Count the total number of days required.
+- If the required days are less than or equal to `D`:
+  - The capacity is valid.
+  - Try to find a smaller valid capacity.
+- Otherwise:
+  - Increase the capacity.
+
+#### Monotonic Property
+
+- If a ship capacity `C` can deliver all packages within `D` days, then any capacity greater than `C` can also deliver them within `D` days.
+
+#### Time Complexity
+
+```text
+O(n × log(sum(weights)))
+```
+
+#### Space Complexity
+
+```text
+O(1)
+```
 ---
 
 ## 🎯 Learning Outcomes
