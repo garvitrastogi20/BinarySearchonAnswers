@@ -18,6 +18,8 @@ The goal of this repository is to build a strong understanding of identifying mo
 | 6 | Capacity to Ship Packages Within D Days | [capacitytoshipwithinddays.cpp](./codes/capacitytoshipwithinddays.cpp) |
 | 7 | Kth Missing Positive Number (Linear Approach) | [kthmissingpositive.cpp](./codes/kthmissingpositive.cpp) |
 | 8 | Kth Missing Positive Number (Binary Search Approach) | [kthmissingpositivestriver.cpp](./codes/kthmissingpositivestriver.cpp) |
+| 9 | Book Allocation Problem (Linear Search Approach) | [allocatebooksls.cpp](./codes/allocatebooksls.cpp) |
+| 10 | Book Allocation Problem (Binary Search Approach) | [allocatebooksbs.cpp](./codes/allocatebooksbs.cpp) |
 
 ---
 
@@ -326,6 +328,100 @@ O(1)
 ```
 
 ---
+### 9. Book Allocation Problem (Linear Search Approach)
+
+**File:** `codes/allocatebooksls.cpp`
+
+#### Approach
+
+- We need to allocate books among `m` students such that:
+  - Each student gets at least one book.
+  - Books are allocated contiguously.
+  - The maximum pages assigned to any student is minimized.
+- The answer lies between:
+  - Maximum pages in a single book.
+  - Sum of all pages in all books.
+- Linearly check every possible answer in this range.
+- For each candidate value:
+  - Allocate books greedily.
+  - Count the number of students required.
+- Return the first value that can allocate books to at most `m` students.
+
+#### Time Complexity
+
+```text
+O(n × (sum(arr) - max(arr)))
+```
+
+#### Space Complexity
+
+```text
+O(1)
+```
+
+---
+
+### 10. Book Allocation Problem (Binary Search Approach)
+
+**File:** `codes/allocatebooksbs.cpp`
+
+#### Approach
+
+- We need to minimize the maximum number of pages assigned to any student.
+- The answer lies between:
+  - Maximum pages in a single book.
+  - Sum of all pages in all books.
+- Use Binary Search on this search space.
+- For a chosen value `mid`:
+  - Allocate books greedily.
+  - Count the number of students required.
+- If the required students are less than or equal to `m`:
+  - The allocation is possible.
+  - Try to find a smaller valid answer.
+- Otherwise:
+  - Increase the page limit.
+
+#### Monotonic Property
+
+- If a page limit `X` can allocate all books among `m` students, then any page limit greater than `X` can also allocate them successfully.
+
+#### Time Complexity
+
+```text
+O(n × log(sum(arr)))
+```
+
+#### Space Complexity
+
+```text
+O(1)
+```
+
+---
+
+## 🎯 Learning Outcomes
+
+Through these problems, I learned:
+
+- How to identify a monotonic search space.
+- Difference between Binary Search on Arrays and Binary Search on Answers.
+- Designing efficient helper/check functions.
+- Preventing overflow while computing powers.
+- Applying binary search to mathematical problems.
+- Solving optimization problems by minimizing or maximizing a valid answer.
+- Using binary search with constraints involving time, speed, days, divisors, capacity, and allocation.
+- Solving missing-number problems using both linear and binary search approaches.
+- Using the formula `arr[i] - (i + 1)` to count missing elements efficiently.
+- Optimizing an O(n) solution to O(log n) using Binary Search.
+- Understanding partition-based optimization problems.
+- Learning how to allocate resources under constraints.
+- Comparing brute-force/linear search solutions with Binary Search on Answers.
+- Identifying search spaces using `max(arr)` and `sum(arr)`.
+- Solving allocation and load-balancing problems efficiently.
+- Recognizing hidden monotonic patterns in sorted arrays.
+- Recognizing common Binary Search on Answers patterns used in coding interviews.
+
+---
 
 ## 🎯 Learning Outcomes
 
@@ -353,8 +449,9 @@ Through these problems, I learned:
 
 ---
 
+
 ## ⭐ Repository Progress
 
-**Problems Solved:** 8
+**Problems Solved:** 10
 
 This repository will continue to grow as I complete more Binary Search on Answers problems from Striver's A2Z DSA Sheet.
