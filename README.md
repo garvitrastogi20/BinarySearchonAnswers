@@ -20,6 +20,8 @@ The goal of this repository is to build a strong understanding of identifying mo
 | 8 | Kth Missing Positive Number (Binary Search Approach) | [kthmissingpositivestriver.cpp](./codes/kthmissingpositivestriver.cpp) |
 | 9 | Book Allocation Problem (Linear Search Approach) | [allocatebooksls.cpp](./codes/allocatebooksls.cpp) |
 | 10 | Book Allocation Problem (Binary Search Approach) | [allocatebooksbs.cpp](./codes/allocatebooksbs.cpp) |
+| 11 | Aggressive Cows | [aggresivecows.cpp](./codes/aggresivecows.cpp) |
+| 12 | Split Array Largest Sum | [splitarraylargestsum.cpp](./codes/splitarraylargestsum.cpp) |
 
 ---
 
@@ -398,6 +400,81 @@ O(1)
 ```
 
 ---
+### 11. Aggressive Cows
+
+**File:** `codes/aggresivecows.cpp`
+
+#### Approach
+
+- We are given the positions of stalls and need to place `k` cows such that the minimum distance between any two cows is maximized.
+- Sort the stall positions.
+- The answer lies between:
+  - Minimum distance = `1`
+  - Maximum distance = `lastStall - firstStall`
+- Use Binary Search on this search space.
+- For a chosen distance `mid`:
+  - Place the first cow in the first stall.
+  - Greedily place the remaining cows in the next valid stalls that maintain at least `mid` distance.
+- If all cows can be placed:
+  - Try a larger minimum distance.
+- Otherwise:
+  - Decrease the distance.
+
+#### Monotonic Property
+
+- If it is possible to place all cows with a minimum distance `d`, then it is also possible to place them with any distance smaller than `d`.
+
+#### Time Complexity
+
+```text
+O(n log n + n × log(lastStall - firstStall))
+```
+
+#### Space Complexity
+
+```text
+O(1)
+```
+
+---
+
+### 12. Split Array Largest Sum
+
+**File:** `codes/splitarraylargestsum.cpp`
+
+#### Approach
+
+- We need to split the array into `k` non-empty subarrays such that the largest subarray sum is minimized.
+- The answer lies between:
+  - Maximum element in the array.
+  - Sum of all array elements.
+- Use Binary Search on this search space.
+- For a chosen value `mid`:
+  - Form subarrays greedily while keeping each subarray sum ≤ `mid`.
+  - Count the number of subarrays formed.
+- If the number of subarrays is less than or equal to `k`:
+  - The answer is valid.
+  - Try to minimize it further.
+- Otherwise:
+  - Increase the allowed largest sum.
+
+#### Monotonic Property
+
+- If a largest subarray sum `X` allows splitting the array into at most `k` subarrays, then any value greater than `X` will also work.
+
+#### Time Complexity
+
+```text
+O(n × log(sum(arr)))
+```
+
+#### Space Complexity
+
+```text
+O(1)
+```
+
+---
 
 ## 🎯 Learning Outcomes
 
@@ -433,14 +510,22 @@ Through these problems, I learned:
 - Preventing overflow while computing powers.
 - Applying binary search to mathematical problems.
 - Solving optimization problems by minimizing or maximizing a valid answer.
-- Using binary search with constraints involving time, speed, days, divisors, and capacity.
+- Using binary search with constraints involving time, speed, days, divisors, capacity, allocation, distance, and partitioning.
 - Solving missing-number problems using both linear and binary search approaches.
 - Using the formula `arr[i] - (i + 1)` to count missing elements efficiently.
 - Optimizing an O(n) solution to O(log n) using Binary Search.
+- Understanding partition-based optimization problems.
+- Learning how to allocate resources under constraints.
+- Comparing brute-force/linear search solutions with Binary Search on Answers.
+- Identifying search spaces using `max(arr)` and `sum(arr)`.
+- Solving allocation and load-balancing problems efficiently.
+- Applying Binary Search on Answers to placement and spacing problems.
+- Understanding how greedy checking functions combine with binary search.
 - Recognizing hidden monotonic patterns in sorted arrays.
 - Recognizing common Binary Search on Answers patterns used in coding interviews.
 
 ---
+
 
 ## 🚀 Source
 
@@ -449,9 +534,8 @@ Through these problems, I learned:
 
 ---
 
-
 ## ⭐ Repository Progress
 
-**Problems Solved:** 10
+**Problems Solved:** 12
 
 This repository will continue to grow as I complete more Binary Search on Answers problems from Striver's A2Z DSA Sheet.
